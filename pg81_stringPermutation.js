@@ -21,8 +21,8 @@ function stringPermutation(str){
         let remainingString = str.slice(0,i) + str.slice(i+1, str.length)
 
         for(let j = 0; j < remainingString.length; j++){
-        //    let result = char + stringPermutation(remainingString)[j]
-           arr.push(char + stringPermutation(remainingString)[j])
+           let result = char + stringPermutation(remainingString)[j]
+           arr.push(result)
         }
 
         // SECOND LOOPING APPROACH for the remaining string
