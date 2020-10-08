@@ -34,6 +34,65 @@ function stringPermutation(str){
     return arr
 }
 
-let res = stringPermutation("abbc")
-console.log(res)
+// let res = stringPermutation("abbc")
+// console.log(res)
 
+//Using the sliding window pattern 
+function slidingCheckForPerm(str, str2){
+    if(!str||!str2) return "Please provide both strings";
+    let result = stringPermutation(str);
+    let count = 0;
+    let ar = []
+    
+    for(let i = 0; i < str2.length; i++){
+        let string = '';
+        for(let j = 0; j < str.length; j++){
+            string += str2[i+j]
+        }
+        for(let val of result){
+            if(val === string){
+                ar.push(val)
+                count++;
+            }
+        }
+    }
+    // console.log(ar," +++++++++++ ", result)
+    return ar;
+}
+
+// let rest = slidingCheckForPerm("abbc","cbabadcbbabbcbabaabccbabc")
+// console.log(rest)
+
+
+//this method will first check if the letter under consideration(within second string) exists in the 
+//first string
+function iteratingCheckPermut(string, string2){
+    if(!string||!string2) return "You must provide both strings";
+
+    let result = stringPermutation(string);
+    let count = 0;
+    let ar = [];
+    let characters = string.split('')
+    characters = [...new Set(characters)]
+
+    for(let i = 0; i < string2.length; i++){
+        let letter = string2[i];
+        let str = '';
+        if(characters.includes(letter)){
+            for(let j = 0; j < string.length; j++){
+                str += string2[i+j]
+            }
+            for(let v of result){
+                if(v == str){
+                    count++;
+                    ar.push(v)
+                }
+            }
+        }
+    }
+    console.log(count)
+    return ar;
+}
+
+let res = iteratingCheckPermut("abbc","cbabadcbbabbcbabaabccbabc")
+console.log(res)
