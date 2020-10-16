@@ -71,9 +71,10 @@ function iteratingCheckPermut(string, string2){
 
     let result = stringPermutation(string);
     let count = 0;
-    let ar = [];
+    // let ar = [];
     let characters = string.split('')
     characters = [...new Set(characters)]
+    let position = []
 
     for(let i = 0; i < string2.length; i++){
         let letter = string2[i];
@@ -83,15 +84,17 @@ function iteratingCheckPermut(string, string2){
                 str += string2[i+j]
             }
             for(let v of result){
-                if(v == str){
+                if(v == str){  
                     count++;
-                    ar.push(v)
+                    // ar.push(v)
+                    position.push(i);
                 }
             }
         }
     }
-    console.log(count)
-    return ar;
+    location = [... new Set(position)]
+    // console.log(count, "++++", position)
+    return location;
 }
 
 let res = iteratingCheckPermut("abbc","cbabadcbbabbcbabaabccbabc")
