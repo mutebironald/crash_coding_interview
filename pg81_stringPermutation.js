@@ -7,31 +7,24 @@ of the shorter string within the longer one. Print the location of each permutat
 // b: cbabadcbbabbcbabaabccbabc
 function stringPermutation(str){
     if (!str || typeof str !== "string"){
-        console.log("Please enter a string")
         return "Please enter a string";
-    } else if (str.length < 2 ){
+    } else if (str.length === 1 ){
         return str
+    }else if(str.length === 2){
+        return [str, str[1] + str[0]]
     }
     
     let arr = [];
     for(let i = 0; i < str.length; i++){
         let char = str[i];
-        //only use this for second looping appoach
-        // if (str.indexOf(char) != i)continue
+        if (str.indexOf(char) != i) continue;
         let remainingString = str.slice(0,i) + str.slice(i+1, str.length)
-
-        for(let j = 0; j < remainingString.length; j++){
-           let result = char + stringPermutation(remainingString)[j]
-           arr.push(result)
+        for(let permutation of stringPermutation(remainingString)){
+            let result = char + permutation;
+            arr.push(result);
         }
-
-        // SECOND LOOPING APPROACH for the remaining string
-        // for(let permutation of stringPermutation(remainingString)){
-        //     arr.push(char + permutation)
-        // }
     }
-    // console.log(arr)
-    return arr
+    return arr;
 }
 
 // let res = stringPermutation("abbc")
@@ -56,7 +49,6 @@ function slidingCheckForPerm(str, str2){
             }
         }
     }
-    // console.log(ar," +++++++++++ ", result)
     return ar;
 }
 
@@ -71,7 +63,7 @@ function iteratingCheckPermut(string, string2){
 
     let result = stringPermutation(string);
     let count = 0;
-    // let ar = [];
+    let ar = [];
     let characters = string.split('')
     characters = [...new Set(characters)]
     let position = []
@@ -86,14 +78,13 @@ function iteratingCheckPermut(string, string2){
             for(let v of result){
                 if(v == str){  
                     count++;
-                    // ar.push(v)
+                    ar.push(v)
                     position.push(i);
                 }
             }
         }
     }
     location = [... new Set(position)]
-    // console.log(count, "++++", position)
     return location;
 }
 
