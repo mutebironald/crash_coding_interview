@@ -53,18 +53,37 @@ function palindromPermutation(str){
 //need to understand this
 function palinPerm(str){
     const sanitized = str.toLowerCase().split(" ").join('');
-    const freq = new Map();
-    for(let i = 0; i < sanitized.length; i++){
-        const char = sanitized.charAt(i);
-        const prevFreq = freq.get(char) || 0;
-        freq.set(char, prevFreq + 1);
-    }
-    let oddCount = 0;
-    for(let char of freq){
-        if(char[1] % 2 !== 0){
-            oddCount++;
+
+    //commented out is an alternate approach
+    //TODO: why does oddCount matter;
+    // const freq = new Map();
+    // for(let i = 0; i < sanitized.length; i++){
+    //     const char = sanitized.charAt(i);
+    //     console.log(" char ", char)
+    //     const prevFreq = freq.get(char) || 0;
+    //     freq.set(char, prevFreq + 1);
+    // }
+    // let oddCount = 0;
+    // for(let char of freq){
+    //     if(char[1] % 2 !== 0){
+    //         oddCount++;
+    //     }
+    // }
+    const freq = {};
+    for(let i =0; i < sanitized.length; i++){
+        let val = sanitized[i]
+        if(freq[val] === undefined){
+            freq[val] = 1;
+        }else{
+            freq[val]++;
         }
     }
+    let oddCount = 0;
+    Object.keys(freq).map(function(key, idx){
+        if(freq[key] % 2 !== 0){
+            oddCount++;
+        }
+    })
     return oddCount < 2;
 }
 
