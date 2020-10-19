@@ -55,7 +55,7 @@ function palinPerm(str){
     const sanitized = str.toLowerCase().split(" ").join('');
 
     //commented out is an alternate approach
-    //TODO: why does oddCount matter;
+    //TODO: why does oddCount matter; //Answer: because when we have only one(or zero) letter then it passes coz there will be a permutation that satisfies a palindrome
     // const freq = new Map();
     // for(let i = 0; i < sanitized.length; i++){
     //     const char = sanitized.charAt(i);
